@@ -138,7 +138,7 @@ shape = SubResource("RectangleShape2D_qib2g")
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1451957606]
 show_behind_parent = true
 top_level = true
-position = Vector2(0, -3)
+position = Vector2(7, -3)
 up_direction = Vector2(5e-05, 1)
 script = ExtResource("6_37rhu")
 

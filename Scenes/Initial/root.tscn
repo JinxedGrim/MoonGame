@@ -2,6 +2,52 @@
 
 [ext_resource type="Script" uid="uid://cr20gc84icaos" path="res://Scenes/Initial/root.gd" id="1_a3845"]
 [ext_resource type="Script" uid="uid://fnqxsivbav4l" path="res://Scenes/Initial/PlayerController.gd" id="2_a3845"]
+[ext_resource type="Texture2D" uid="uid://1gpc4k3a3w1x" path="res://Assets/Player/Cosmonaught/Cosmonaught.png" id="2_wfgyk"]
+[ext_resource type="Texture2D" uid="uid://o8dyf8ud2dwq" path="res://Assets/Player/Cosmonaught/walking.png" id="3_b8phq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0r7px"]
+atlas = ExtResource("3_b8phq")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mu1ri"]
+atlas = ExtResource("3_b8phq")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qib2g"]
+atlas = ExtResource("3_b8phq")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37rhu"]
+atlas = ExtResource("3_b8phq")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4nrli"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wfgyk")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0r7px")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mu1ri")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qib2g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_37rhu")
+}],
+"loop": true,
+"name": &"Walking",
+"speed": 5.0
+}]
 
 [node name="Root" type="Node2D" unique_id=1675071097]
 script = ExtResource("1_a3845")
@@ -9,5 +55,9 @@ script = ExtResource("1_a3845")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=217011915]
 zoom = Vector2(15, 15)
 
-[node name="PlayerPlaceHolder" type="Node2D" parent="." unique_id=1555335381]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1267833415]
+position = Vector2(0, -8)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_4nrli")
+animation = &"Walking"
 script = ExtResource("2_a3845")

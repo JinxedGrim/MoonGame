@@ -108,7 +108,7 @@ script = ExtResource("1_a3845")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=217011915]
 zoom = Vector2(15, 15)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1267833415]
+[node name="Player" type="AnimatedSprite2D" parent="." unique_id=1267833415]
 position = Vector2(0, -8)
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_4nrli")

@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://1gpc4k3a3w1x" path="res://Assets/Player/Cosmonaught/Cosmonaught.png" id="2_wfgyk"]
 [ext_resource type="Texture2D" uid="uid://o8dyf8ud2dwq" path="res://Assets/Player/Cosmonaught/walking.png" id="3_b8phq"]
 [ext_resource type="Script" uid="uid://bccigvplmfjfa" path="res://Scenes/Initial/LunarLander.gd" id="5_b8phq"]
+[ext_resource type="Script" path="res://Scenes/Initial/PlayerHudController.gd" id="6_hud"]
 
 [sub_resource type="GDScript" id="GDScript_b8phq"]
 script/source = "extends CharacterBody2D
@@ -132,3 +133,8 @@ script = ExtResource("2_0r7px")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPoint/CharacterBody2D" unique_id=85708860]
 shape = SubResource("RectangleShape2D_0r7px")
+[node name="LunarLander" type="AnimatedSprite2D" parent="." unique_id=33494763]
+script = ExtResource("5_b8phq")
+
+[node name="PlayerHudController" type="CanvasLayer" parent="." unique_id=123456789]
+script = ExtResource("6_hud")

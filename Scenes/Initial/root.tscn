@@ -114,30 +114,24 @@ script = ExtResource("1_a3845")
 [node name="PlayerHudController" type="CanvasLayer" parent="." unique_id=123456789]
 script = ExtResource("6_hud")
 
-[node name="Sky" type="Sprite2D" parent="." unique_id=1951648828]
-z_index = -1
-position = Vector2(6.9999995, -1)
-scale = Vector2(0.12074468, 0.09422509)
-texture = ExtResource("7_mu1ri")
-
 [node name="LunarLander" type="CharacterBody2D" parent="." unique_id=282141466]
+position = Vector2(0, -30)
 script = ExtResource("5_qib2g")
 
 [node name="LanderSprite" type="AnimatedSprite2D" parent="LunarLander" unique_id=1890200277]
-position = Vector2(0, -30)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_cdy35")
 animation = &"Flying"
 script = SubResource("GDScript_qib2g")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LunarLander" unique_id=440124783]
-position = Vector2(0, -31.5)
+[node name="LanderCollider" type="CollisionShape2D" parent="LunarLander" unique_id=440124783]
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_qib2g")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1451957606]
 show_behind_parent = true
 top_level = true
-position = Vector2(7, -3)
+position = Vector2(15, -5)
 up_direction = Vector2(5e-05, 1)
 script = ExtResource("6_37rhu")
 
@@ -149,9 +143,15 @@ animation = &"Idle"
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=217011915]
 position = Vector2(0, -3)
 zoom = Vector2(15, 15)
-position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 script = ExtResource("2_0r7px")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=85708860]
+[node name="CharacterCollider" type="CollisionShape2D" parent="CharacterBody2D" unique_id=85708860]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_0r7px")
+
+[node name="Sky" type="Sprite2D" parent="CharacterBody2D" unique_id=1951648828]
+z_index = -1
+position = Vector2(1.0728836e-06, 3.500001)
+scale = Vector2(0.14255321, 0.1131757)
+texture = ExtResource("7_mu1ri")

@@ -9,17 +9,17 @@ func _ready() -> void:
 	TileTexture = load("res://Assets/Tiles/Tile_1.png")
 	_generateRandomLevel()
 	var lander = $LunarLander  # shorthand for get_node("AnimatedSprite2D")
-	lander.IsLanding = true;
-	
+	lander.IsLanding = true
+	var player = $CharacterBody2D  # shorthand for get_node("AnimatedSprite2D")
+
 func _process(delta: float) -> void:
 	var lander = $LunarLander  # shorthand for get_node("AnimatedSprite2D")
 	var player = $CharacterBody2D  # shorthand for get_node("AnimatedSprite2D")
 	if lander.IsLanding == false:
-		if lander.LadderOut:
-			if not hasSpawned:
-				player.visible = true
-				hasSpawned = true
-				player.position += Vector2(5, 0)
+		lander.LadderOut = true
+		if not hasSpawned:
+			player.visible = true;
+			hasSpawned = true
 
 func _generateRandomLevel() -> void:
 	var current_step = 0

@@ -31,11 +31,12 @@ func _physics_process(delta: float) -> void:
 		# Apply gravity only if not yet on the floor
 		if not is_on_floor():
 			velocity += get_gravity() * delta
+			
+			player.visible = false
+
 			if AnimMode == AnimationMode.Idle:
 				updateAnimation = true
 				AnimMode = AnimationMode.Flying	
-				player.position = self.position
-				player.visible = false
 		else:
 			velocity.y = 0
 			IsLanding = false
@@ -47,7 +48,7 @@ func _physics_process(delta: float) -> void:
 					AnimMode = AnimationMode.LadderOut
 				else:
 					AnimMode = AnimationMode.Idle
-
+					
 	if updateAnimation:
 		_updateAnimation()
 	# Move the rocket

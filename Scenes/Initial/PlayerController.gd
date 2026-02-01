@@ -11,7 +11,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var input_vector = Vector2.ZERO
-		# WASD / arrow keys
+	# WASD / arrow keys
 	if Input.is_action_pressed("ui_right") or Input.is_action_pressed("d"):
 		input_vector.x += 1
 	if Input.is_action_pressed("ui_left") or Input.is_action_pressed("a"):
@@ -25,3 +25,5 @@ func _process(delta: float) -> void:
 
 	var velocity = input_vector * speed
 	
+	# Apply movement to the character
+	global_position += velocity

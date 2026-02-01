@@ -6,15 +6,7 @@ const TileScale = 64.0
 var TileTexture: Texture2D
 
 func _ready() -> void:
-	TileTexture = load("res://Assets/Tiles/Tile_2.png")
-	
-	# THE CAMERA: Set up the lens so we can see the start
-	var cam = Camera2D.new()
-	cam.enabled = true
-	add_child(cam)
-	cam.make_current()
-	cam.position = Vector2(600, 200) 
-	
+	TileTexture = load("res://Assets/Tiles/Tile_1.png")
 	_generateRandomLevel()
 
 func _generateRandomLevel() -> void:

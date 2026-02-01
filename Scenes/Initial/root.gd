@@ -1,44 +1,66 @@
 extends Node2D
 
-# these are all in game units
-const LevelWidth = 50
-const LevelHeight = 5
-const TileScale = 5.0
+const LevelWidth = 100   # Longer level for more fun
+const TileScale = 64.0   
 
 var TileTexture: Texture2D
 
-# this will run once everything else is loaded im gonna do terrain generation here 
-# but ideally we use await / maybe generate from another small scene (display a loading splash
-func _generateTiles() -> void:
-	# original texture size in pixels
-	var textureSize = TileTexture.get_size()
-	
-	for x in range(LevelWidth):
-		for y in range(LevelHeight):
-			var tile = StaticBody2D.new()
-			
-			var tileSprite = Sprite2D.new()
-			tileSprite.texture = TileTexture
-			tileSprite.position = Vector2(0, 0)
-			tileSprite.scale = Vector2(TileScale / textureSize.x, TileScale / textureSize.y)
-			tile.add_child(tileSprite)
-			
-			var collider = CollisionShape2D.new()
-			var shape = RectangleShape2D.new()
-			shape.extents = (textureSize * TileScale) / 2  # half-width/height
-			collider.shape = shape
-			collider.position = Vector2(0, 0)
-			tile.add_child(collider)
-
-			tile.position = Vector2(x * TileScale, y * TileScale)
-			
-			add_child(tile)
-
 func _ready() -> void:
 	TileTexture = load("res://Assets/Tiles/Tile_2.png")
-	_generateTiles()
+	
+	# THE CAMERA: Set up the lens so we can see the start
+	var cam = Camera2D.new()
+	cam.enabled = true
+	add_child(cam)
+	cam.make_current()
+	cam.position = Vector2(600, 200) 
+	
+	_generateRandomLevel()
 
+func _generateRandomLevel() -> void:
+	var current_step = 0
+	
+	for x in range(LevelWidth):
+		# 1. THE HOLE CHANCE
+		# Roll a 10-sided die. If it's 1, skip this column (creates a gap/hole)
+		if x > 5 and randi() % 10 == 0:
+			continue # This skips all the code below and moves to the next 'x'
+			
+		# 2. THE RANDOM HEIGHT
+		# Every 3 blocks, we might change height drastically
+		if x % 3 == 0:
+			# Randomly choose: -2, -1, 0, 1, or 2 blocks high
+			current_step += randi_range(-2, 2)
+			
+		# 3. BUILDING THE COLUMN
+		for y in range(4):
+			var tile = StaticBody2D.new()
+			
+			# Visuals
+			var tileSprite = Sprite2D.new()
+			if TileTexture != null:
+				tileSprite.texture = TileTexture
+			else:
+				tileSprite.texture = PlaceholderTexture2D.new()
+				tileSprite.texture.size = Vector2(64, 64)
+			
+			tileSprite.centered = false
+			tileSprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+			var tex_size = tileSprite.texture.get_size()
+			tileSprite.scale = Vector2(TileScale / tex_size.x, TileScale / tex_size.y)
+			tile.add_child(tileSprite)
+			
+			# Physics
+			var collider = CollisionShape2D.new()
+			var shape = RectangleShape2D.new()
+			shape.size = Vector2(TileScale, TileScale)
+			collider.shape = shape
+			collider.position = Vector2(TileScale / 2, TileScale / 2)
+			tile.add_child(collider)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+			# Placement
+			var x_pos = x * TileScale
+			var y_pos = 300 - (current_step * TileScale) + (y * TileScale)
+			tile.position = Vector2(x_pos, y_pos)
+			
+			add_child(tile)

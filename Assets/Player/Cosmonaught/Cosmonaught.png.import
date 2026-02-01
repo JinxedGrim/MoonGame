@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://boo6dk1fec8bv"
-path="res://.godot/imported/Tile_2.png-e6320db29c67002ae7389ac55609cc2f.ctex"
+uid="uid://1gpc4k3a3w1x"
+path="res://.godot/imported/Cosmonaught.png-2a583660774900a67767e0d91543dff7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/Tile_2.png"
-dest_files=["res://.godot/imported/Tile_2.png-e6320db29c67002ae7389ac55609cc2f.ctex"]
+source_file="res://Assets/Player/Cosmonaught/Cosmonaught.png"
+dest_files=["res://.godot/imported/Cosmonaught.png-2a583660774900a67767e0d91543dff7.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://boo6dk1fec8bv"
-path="res://.godot/imported/Tile_2.png-e6320db29c67002ae7389ac55609cc2f.ctex"
+uid="uid://o8dyf8ud2dwq"
+path="res://.godot/imported/walking.png-0796565e1c59dfb9f60af9fd653969aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/Tile_2.png"
-dest_files=["res://.godot/imported/Tile_2.png-e6320db29c67002ae7389ac55609cc2f.ctex"]
+source_file="res://Assets/Player/Cosmonaught/walking.png"
+dest_files=["res://.godot/imported/walking.png-0796565e1c59dfb9f60af9fd653969aa.ctex"]
 
 [params]
 

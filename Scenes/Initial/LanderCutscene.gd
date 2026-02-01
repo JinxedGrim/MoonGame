@@ -47,4 +47,4 @@ func _physics_process(delta: float) -> void:
 	if updateAnimation:
 		_updateAnimation()
 	# Move the rocket
-	move_and_slide()
+	#move_and_slide()

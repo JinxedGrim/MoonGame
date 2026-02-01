@@ -6,8 +6,7 @@ const TileScale = 64.0
 var TileTexture: Texture2D
 
 func _ready() -> void:
-	TileTexture = load("res://Assets/Tiles/Tile_2.png")
-	
+	TileTexture = load("res://Assets/Tiles/Tile_1.png")
 	_generateRandomLevel()
 
 func _generateRandomLevel() -> void:

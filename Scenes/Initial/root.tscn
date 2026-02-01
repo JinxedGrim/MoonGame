@@ -1,11 +1,59 @@
 [gd_scene format=3 uid="uid://cx2pkr0wfa0ah"]
 
 [ext_resource type="Script" uid="uid://cr20gc84icaos" path="res://Scenes/Initial/root.gd" id="1_a3845"]
+[ext_resource type="Script" uid="uid://dtmukjy4ibm2j" path="res://Scenes/Initial/camera_2d.gd" id="2_0r7px"]
 [ext_resource type="Script" uid="uid://fnqxsivbav4l" path="res://Scenes/Initial/PlayerController.gd" id="2_a3845"]
 [ext_resource type="Texture2D" uid="uid://1gpc4k3a3w1x" path="res://Assets/Player/Cosmonaught/Cosmonaught.png" id="2_wfgyk"]
 [ext_resource type="Texture2D" uid="uid://o8dyf8ud2dwq" path="res://Assets/Player/Cosmonaught/walking.png" id="3_b8phq"]
 [ext_resource type="Script" uid="uid://bccigvplmfjfa" path="res://Scenes/Initial/LunarLander.gd" id="5_b8phq"]
 [ext_resource type="Script" path="res://Scenes/Initial/PlayerHudController.gd" id="6_hud"]
+
+[sub_resource type="GDScript" id="GDScript_b8phq"]
+script/source = "extends CharacterBody2D
+
+@export var speed = 400
+@export var gravity := 1200.0
+@export var jump_force := -600.0
+
+
+
+# var is_walking := abs(velocity.x) > 1.0
+
+
+
+
+
+
+
+func _physics_process(delta):
+	
+	var input_direction = Vector2.ZERO
+	#Left right 
+	input_direction.x = Input.get_action_strength(\"Right\")- Input.get_action_strength(\"Left\")
+	
+	velocity.x = input_direction.x * speed
+	
+	#jump
+	if Input.is_action_just_pressed(\"Jump\") and is_on_floor():
+		print(\"jump was called\")  
+		velocity.y = jump_force
+	
+	
+	if not is_on_floor():
+		velocity.y += gravity * delta
+	else:
+		velocity.y = 0.0001
+	
+	
+	move_and_slide()
+	
+	#if is_walking:
+		#$AnimatedSprite2D.play(\"walk\")
+	#else:
+		#$AnimatedSprite2D.play(\"idle\")
+	#print(\"I am running\")
+	#print(position)
+"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0r7px"]
 atlas = ExtResource("3_b8phq")
@@ -51,19 +99,40 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0r7px"]
+size = Vector2(4, 6)
+
 [node name="Root" type="Node2D" unique_id=1675071097]
 script = ExtResource("1_a3845")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=217011915]
-zoom = Vector2(15, 15)
+[node name="LunarLander" type="AnimatedSprite2D" parent="." unique_id=33494763]
+script = ExtResource("5_b8phq")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1267833415]
-position = Vector2(0, -8)
+[node name="SpawnPoint" type="Node2D" parent="." unique_id=411798047]
+top_level = true
+position = Vector2(0, 20)
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="SpawnPoint" unique_id=1451957606]
+show_behind_parent = true
+top_level = true
+position = Vector2(0, -3)
+up_direction = Vector2(5e-05, 1)
+script = SubResource("GDScript_b8phq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpawnPoint/CharacterBody2D" unique_id=1267833415]
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_4nrli")
-animation = &"Walking"
+animation = &"Idle"
 script = ExtResource("2_a3845")
 
+[node name="Camera2D" type="Camera2D" parent="SpawnPoint/CharacterBody2D" unique_id=217011915]
+position = Vector2(0, -3)
+zoom = Vector2(15, 15)
+position_smoothing_enabled = true
+script = ExtResource("2_0r7px")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPoint/CharacterBody2D" unique_id=85708860]
+shape = SubResource("RectangleShape2D_0r7px")
 [node name="LunarLander" type="AnimatedSprite2D" parent="." unique_id=33494763]
 script = ExtResource("5_b8phq")
 

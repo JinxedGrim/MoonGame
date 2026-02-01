@@ -4,7 +4,10 @@
 [ext_resource type="Script" uid="uid://fnqxsivbav4l" path="res://Scenes/Initial/PlayerController.gd" id="2_a3845"]
 [ext_resource type="Texture2D" uid="uid://1gpc4k3a3w1x" path="res://Assets/Player/Cosmonaught/Cosmonaught.png" id="2_wfgyk"]
 [ext_resource type="Texture2D" uid="uid://o8dyf8ud2dwq" path="res://Assets/Player/Cosmonaught/walking.png" id="3_b8phq"]
+[ext_resource type="Texture2D" uid="uid://bi5mmhqtods6w" path="res://Assets/MissionObjects/MissionObjects.png" id="5_0r7px"]
 [ext_resource type="Script" uid="uid://bccigvplmfjfa" path="res://Scenes/Initial/LunarLander.gd" id="5_b8phq"]
+[ext_resource type="Script" uid="uid://difn4ktlg814d" path="res://Scenes/Initial/LanderCutscene.gd" id="5_qib2g"]
+[ext_resource type="Texture2D" uid="uid://cquj3fe7tqqbu" path="res://Assets/Sky/sky.png" id="7_mu1ri"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0r7px"]
 atlas = ExtResource("3_b8phq")
@@ -50,6 +53,55 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_4nrli"]
+atlas = ExtResource("5_0r7px")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbs6e"]
+atlas = ExtResource("5_0r7px")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3n4lb"]
+atlas = ExtResource("5_0r7px")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvdal"]
+atlas = ExtResource("5_0r7px")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cdy35"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4nrli")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbs6e")
+}],
+"loop": true,
+"name": &"Flying",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3n4lb")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nvdal")
+}],
+"loop": true,
+"name": &"LadderOut",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0r7px"]
+size = Vector2(12, 16)
+
 [node name="Root" type="Node2D" unique_id=1675071097]
 script = ExtResource("1_a3845")
 
@@ -60,8 +112,25 @@ zoom = Vector2(15, 15)
 position = Vector2(0, -8)
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_4nrli")
-animation = &"Walking"
+animation = &"Idle"
 script = ExtResource("2_a3845")
 
-[node name="LunarLander" type="AnimatedSprite2D" parent="." unique_id=33494763]
+[node name="LunarLander" type="CharacterBody2D" parent="." unique_id=123500053]
+position = Vector2(0, -30)
+script = ExtResource("5_qib2g")
+
+[node name="LanderSprite" type="AnimatedSprite2D" parent="LunarLander" unique_id=33494763]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_cdy35")
+animation = &"LadderOut"
+frame_progress = 0.6787487
 script = ExtResource("5_b8phq")
+
+[node name="Collider" type="CollisionShape2D" parent="LunarLander" unique_id=159487781]
+shape = SubResource("RectangleShape2D_0r7px")
+
+[node name="Sky" type="Sprite2D" parent="." unique_id=1951648828]
+z_index = -1
+position = Vector2(0.75000304, 5.109373)
+scale = Vector2(0.12074468, 0.09422509)
+texture = ExtResource("7_mu1ri")

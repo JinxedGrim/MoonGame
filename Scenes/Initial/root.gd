@@ -1,20 +1,12 @@
 extends Node2D
 
 const LevelWidth = 100   # Longer level for more fun
-const TileScale = 64.0   
+const TileScale = 10
 
 var TileTexture: Texture2D
 
 func _ready() -> void:
-	TileTexture = load("res://Assets/Tiles/Tile_2.png")
-	
-	# THE CAMERA: Set up the lens so we can see the start
-	var cam = Camera2D.new()
-	cam.enabled = true
-	add_child(cam)
-	cam.make_current()
-	cam.position = Vector2(600, 200) 
-	
+	TileTexture = load("res://Assets/Tiles/Tile_1.png")
 	_generateRandomLevel()
 
 func _generateRandomLevel() -> void:
@@ -60,7 +52,7 @@ func _generateRandomLevel() -> void:
 
 			# Placement
 			var x_pos = x * TileScale
-			var y_pos = 300 - (current_step * TileScale) + (y * TileScale)
+			var y_pos = TileScale - (current_step * TileScale) + (y * TileScale)
 			tile.position = Vector2(x_pos, y_pos)
 			
 			add_child(tile)

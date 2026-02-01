@@ -1,11 +1,16 @@
-extends Node
+extends CanvasLayer
 
+# Simple HUD that works without requiring UI elements
+# Can be expanded later with actual UI components
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func _ready():
+	print("HUD Controller initialized - ready for UI elements when needed")
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta):
+	# Currently empty - will handle UI updates when elements are added
 	pass
+
+# Placeholder function for future oxygen system
+func update_ui(amount: float):
+	print("Oxygen: ", amount, "%")
+	# Will update actual UI elements when they're added to the scene

@@ -8,5 +8,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	#print(position)
+	var sky = get_parent().get_parent().get_node("Sky")
+	sky.position = self.position
 	pass

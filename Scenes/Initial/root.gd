@@ -2,12 +2,24 @@ extends Node2D
 
 const LevelWidth = 100   # Longer level for more fun
 const TileScale = 10
-
+var hasSpawned = false
 var TileTexture: Texture2D
 
 func _ready() -> void:
 	TileTexture = load("res://Assets/Tiles/Tile_1.png")
 	_generateRandomLevel()
+	var lander = $LunarLander  # shorthand for get_node("AnimatedSprite2D")
+	lander.IsLanding = true;
+	
+func _process(delta: float) -> void:
+	var lander = $LunarLander  # shorthand for get_node("AnimatedSprite2D")
+	var player = $CharacterBody2D  # shorthand for get_node("AnimatedSprite2D")
+	if lander.IsLanding == false:
+		if lander.LadderOut:
+			if not hasSpawned:
+				player.visible = true
+				hasSpawned = true
+				player.position += Vector2(5, 0)
 
 func _generateRandomLevel() -> void:
 	var current_step = 0

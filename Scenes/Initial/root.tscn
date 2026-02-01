@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://fnqxsivbav4l" path="res://Scenes/Initial/PlayerController.gd" id="2_a3845"]
 [ext_resource type="Texture2D" uid="uid://1gpc4k3a3w1x" path="res://Assets/Player/Cosmonaught/Cosmonaught.png" id="2_wfgyk"]
 [ext_resource type="Texture2D" uid="uid://o8dyf8ud2dwq" path="res://Assets/Player/Cosmonaught/walking.png" id="3_b8phq"]
+[ext_resource type="Script" uid="uid://bccigvplmfjfa" path="res://Scenes/Initial/LunarLander.gd" id="5_b8phq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0r7px"]
 atlas = ExtResource("3_b8phq")
@@ -61,3 +62,6 @@ scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_4nrli")
 animation = &"Walking"
 script = ExtResource("2_a3845")
+
+[node name="LunarLander" type="AnimatedSprite2D" parent="." unique_id=33494763]
+script = ExtResource("5_b8phq")

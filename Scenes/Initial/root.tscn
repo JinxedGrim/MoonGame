@@ -1,9 +1,13 @@
 [gd_scene format=3 uid="uid://cx2pkr0wfa0ah"]
 
 [ext_resource type="Script" uid="uid://cr20gc84icaos" path="res://Scenes/Initial/root.gd" id="1_a3845"]
+[ext_resource type="Script" uid="uid://fnqxsivbav4l" path="res://Scenes/Initial/PlayerController.gd" id="2_a3845"]
 
 [node name="Root" type="Node2D" unique_id=1675071097]
 script = ExtResource("1_a3845")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=217011915]
 zoom = Vector2(15, 15)
+
+[node name="PlayerPlaceHolder" type="Node2D" parent="." unique_id=1555335381]
+script = ExtResource("2_a3845")

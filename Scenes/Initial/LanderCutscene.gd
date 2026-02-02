@@ -25,15 +25,12 @@ func _updateAnimation() -> void:
 
 func _physics_process(delta: float) -> void:
 	var updateAnimation = false
-	var player = get_parent().get_node("CharacterBody2D")
 	
 	if IsLanding:
 		# Apply gravity only if not yet on the floor
 		if not is_on_floor():
 			velocity += get_gravity() * delta
 			
-			player.visible = false
-
 			if AnimMode == AnimationMode.Idle:
 				updateAnimation = true
 				AnimMode = AnimationMode.Flying	

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmgtalel5qg5a"
-path="res://.godot/imported/Soldier.png-eeff34142f98db50e39c4301e1335310.ctex"
+uid="uid://dhdflgtb27ps5"
+path="res://.godot/imported/astronaut_moveset.png-d3794db9ce3f4c0453a9ef533d94cde5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Player/Soldier.png"
-dest_files=["res://.godot/imported/Soldier.png-eeff34142f98db50e39c4301e1335310.ctex"]
+source_file="res://Assets/Player/Cosmonaught/astronaut_moveset.png"
+dest_files=["res://.godot/imported/astronaut_moveset.png-d3794db9ce3f4c0453a9ef533d94cde5.ctex"]
 
 [params]
 

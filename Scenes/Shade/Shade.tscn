@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://c1e3xsfi2vjk5"]
+
+[ext_resource type="Texture2D" uid="uid://bx0jcdrjo47eg" path="res://Assets/Enemy/mobs.png" id="1_18ynq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s2h6r"]
+atlas = ExtResource("1_18ynq")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rwrml"]
+atlas = ExtResource("1_18ynq")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ikxk"]
+atlas = ExtResource("1_18ynq")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6s5gd"]
+atlas = ExtResource("1_18ynq")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7s1lq"]
+atlas = ExtResource("1_18ynq")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idud7"]
+atlas = ExtResource("1_18ynq")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2iwe3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s2h6r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rwrml")
+}],
+"loop": true,
+"name": &"Die",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ikxk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6s5gd")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7s1lq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idud7")
+}],
+"loop": true,
+"name": &"Spawn",
+"speed": 2.0
+}]
+
+[node name="Shade" type="Node2D" unique_id=161646886]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=274964335]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=2141729686]
+sprite_frames = SubResource("SpriteFrames_2iwe3")
+animation = &"Spawn"
+frame_progress = 0.9047598
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1969184078]

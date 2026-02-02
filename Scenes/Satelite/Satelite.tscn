@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://udd4stms41fw"]
+
+[ext_resource type="Texture2D" uid="uid://bi5mmhqtods6w" path="res://Assets/MissionObjects/MissionObjects.png" id="1_7762j"]
+[ext_resource type="Script" uid="uid://dkjltig57e4qt" path="res://Scenes/Satelite/satelite.gd" id="1_kqoyo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqoyo"]
+atlas = ExtResource("1_7762j")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_43fjh"]
+atlas = ExtResource("1_7762j")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e8tiq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kqoyo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_43fjh")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 2.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7762j"]
+size = Vector2(12, 23)
+
+[node name="Satelite" type="Node2D" unique_id=1417630065]
+script = ExtResource("1_kqoyo")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1951164354]
+
+[node name="SateliteSprite" type="AnimatedSprite2D" parent="StaticBody2D" unique_id=441181166]
+texture_filter = 1
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_e8tiq")
+animation = &"Idle"
+frame_progress = 0.5509816
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1878755655]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_7762j")

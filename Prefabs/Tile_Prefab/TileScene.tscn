@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://di5xa8optqtmp"]
+
+[ext_resource type="Texture2D" uid="uid://c4iu4kko4altw" path="res://Assets/Tiles/MoonRocks.PNG" id="1_bm8fu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bvcno"]
+size = Vector2(440, 442)
+
+[node name="Tile" type="Node2D" unique_id=1774111246]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=772378014]
+
+[node name="Sprite" type="Sprite2D" parent="StaticBody2D" unique_id=1486345423]
+texture = ExtResource("1_bm8fu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=2090568010]
+shape = SubResource("RectangleShape2D_bvcno")

@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://y65c61cywtac"]
+
+[ext_resource type="Script" uid="uid://bgq7urkysltg3" path="res://Scenes/IntroSplash/PlayButton.gd" id="1_7at5q"]
+
+[node name="MenuScreen" type="Control" unique_id=1038721786]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="." unique_id=756727498]
+layout_mode = 0
+offset_left = 372.0
+offset_top = 226.0
+offset_right = 793.0
+offset_bottom = 366.0
+text = "Play"
+script = ExtResource("1_7at5q")
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

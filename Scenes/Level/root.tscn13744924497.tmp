@@ -1,14 +1,18 @@
 [gd_scene format=3 uid="uid://cx2pkr0wfa0ah"]
 
-[ext_resource type="Script" uid="uid://cr20gc84icaos" path="res://Scenes/Initial/root.gd" id="1_a3845"]
-[ext_resource type="Script" uid="uid://dtmukjy4ibm2j" path="res://Scenes/Initial/camera_2d.gd" id="2_0r7px"]
+[ext_resource type="Script" uid="uid://cr20gc84icaos" path="res://Scenes/Level/Level.gd" id="1_a3845"]
 [ext_resource type="Texture2D" uid="uid://1gpc4k3a3w1x" path="res://Assets/Player/Cosmonaught/Cosmonaught.png" id="2_wfgyk"]
 [ext_resource type="Texture2D" uid="uid://o8dyf8ud2dwq" path="res://Assets/Player/Cosmonaught/walking.png" id="3_b8phq"]
 [ext_resource type="Texture2D" uid="uid://dhdflgtb27ps5" path="res://Assets/Player/Cosmonaught/astronaut_moveset.png" id="4_37rhu"]
-[ext_resource type="Script" uid="uid://dkh5dknfl24p4" path="res://Scenes/Initial/character_body_2d.gd" id="6_37rhu"]
-[ext_resource type="Script" uid="uid://bcxoiu7lsfk0h" path="res://Scenes/Initial/PlayerHudController.gd" id="6_hud"]
+[ext_resource type="Script" uid="uid://dkh5dknfl24p4" path="res://Prefabs/Player_Prefab/PlayerController.gd" id="6_37rhu"]
+[ext_resource type="Script" uid="uid://bcxoiu7lsfk0h" path="res://Prefabs/Player_Prefab/PlayerHudController.gd" id="6_hud"]
 [ext_resource type="Texture2D" uid="uid://cquj3fe7tqqbu" path="res://Assets/Sky/sky.png" id="7_mu1ri"]
-[ext_resource type="PackedScene" uid="uid://wyqdx5p51al1" path="res://Scenes/Lander_Prefab/LanderPrefab.tscn" id="8_qib2g"]
+[ext_resource type="PackedScene" uid="uid://wyqdx5p51al1" path="res://Prefabs/Lander_Prefab/LanderPrefab.tscn" id="8_qib2g"]
+[ext_resource type="Script" uid="uid://qbpgmnwoak8c" path="res://Scenes/Level/SceneCamera.gd" id="9_37rhu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtau3"]
+atlas = ExtResource("4_37rhu")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4nrli"]
 atlas = ExtResource("4_37rhu")
@@ -68,6 +72,14 @@ region = Rect2(32, 32, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4nrli"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtau3")
+}],
+"loop": true,
+"name": &"Falling",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4nrli")
@@ -145,41 +157,49 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0r7px"]
-size = Vector2(4, 7)
+size = Vector2(20, 28)
 
-[node name="Root" type="Node2D" unique_id=1675071097]
+[node name="Level" type="Node2D" unique_id=1675071097]
 script = ExtResource("1_a3845")
 
 [node name="PlayerHudController" type="CanvasLayer" parent="." unique_id=123456789]
 script = ExtResource("6_hud")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1451957606]
+[node name="PlayerBody" type="CharacterBody2D" parent="." unique_id=1451957606]
 show_behind_parent = true
-top_level = true
-position = Vector2(15, -5)
-up_direction = Vector2(5e-05, 1)
-script = ExtResource("6_37rhu")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1267833415]
-texture_filter = 1
+position = Vector2(18, -5)
 scale = Vector2(0.25, 0.25)
+up_direction = Vector2(5e-05, 1)
+slide_on_ceiling = false
+safe_margin = 0.001
+script = ExtResource("6_37rhu")
+speed = null
+jumpSpeed = null
+
+[node name="Sprite" type="AnimatedSprite2D" parent="PlayerBody" unique_id=1267833415]
+texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_4nrli")
-animation = &"Idle"
+animation = &"Falling"
 
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=217011915]
-position = Vector2(0, -3)
-zoom = Vector2(15, 15)
-position_smoothing_speed = 10.0
-script = ExtResource("2_0r7px")
-
-[node name="CharacterCollider" type="CollisionShape2D" parent="CharacterBody2D" unique_id=85708860]
-position = Vector2(0, -0.5)
+[node name="Collider" type="CollisionShape2D" parent="PlayerBody" unique_id=85708860]
+position = Vector2(-2, -2)
 shape = SubResource("RectangleShape2D_0r7px")
 
-[node name="Sky" type="Sprite2D" parent="CharacterBody2D" unique_id=1951648828]
-z_index = -1
-position = Vector2(1.0728836e-06, 3.500001)
-scale = Vector2(0.14255321, 0.1131757)
-texture = ExtResource("7_mu1ri")
+[node name="RayCast2D" type="RayCast2D" parent="PlayerBody" unique_id=709384596]
+target_position = Vector2(0, 12)
 
 [node name="LanderPrefab" parent="." unique_id=1445736981 instance=ExtResource("8_qib2g")]
+position = Vector2(7, -50)
+
+[node name="Camera" type="Camera2D" parent="." unique_id=217011915]
+position = Vector2(15, -5.75)
+scale = Vector2(0.25, 0.25)
+zoom = Vector2(15, 15)
+position_smoothing_speed = 10.0
+script = ExtResource("9_37rhu")
+
+[node name="Sky" type="Sprite2D" parent="Camera" unique_id=1951648828]
+z_index = -1
+position = Vector2(0, 19)
+scale = Vector2(0.48, 0.371)
+texture = ExtResource("7_mu1ri")

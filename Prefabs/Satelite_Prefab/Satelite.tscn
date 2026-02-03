@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://udd4stms41fw"]
 
 [ext_resource type="Texture2D" uid="uid://bi5mmhqtods6w" path="res://Assets/MissionObjects/MissionObjects.png" id="1_7762j"]
-[ext_resource type="Script" uid="uid://dkjltig57e4qt" path="res://Scenes/Satelite/satelite.gd" id="1_kqoyo"]
+[ext_resource type="Script" uid="uid://dkjltig57e4qt" path="res://Prefabs/Satelite_Prefab/satelite.gd" id="1_kqoyo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kqoyo"]
 atlas = ExtResource("1_7762j")

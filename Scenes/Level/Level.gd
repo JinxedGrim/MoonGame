@@ -1,69 +1,79 @@
 extends Node2D
 
-const LevelWidth = 100   # Longer level for more fun
-const LevelHeight = 4   # Longer level for more fun
-const TileScale = 10
+@export var LevelWidth = 50 
+@export var LevelHeight = 1
+@export var TileScale = 7 # in px but preferably in units!!
+@export var SatScene := preload("res://Prefabs/Satelite_Prefab/Satelite.tscn")
+@export var TilePrefab := preload("res://Prefabs/Tile_Prefab/TileScene.tscn")
+var landerPrefab = null
+var lander = null
 var hasSpawned = false
-var TileTexture: Texture2D
-var SatScene := preload("res://Scenes/Satelite/Satelite.tscn")
+var TileTexture: Texture2D = preload("res://Assets/Tiles/MoonRocks.PNG")
 
+
+var trackPlayer = false
+var trackLander = true
+var hasPlayedLanderExit = false
 
 func _ready() -> void:
-	TileTexture = load("res://Assets/Tiles/Tile_1.png")
+	landerPrefab = $LanderPrefab  # shorthand for get_node("AnimatedSprite2D")
+	lander = landerPrefab.get_node("LunarLander")
 	GenerateTestLevel()
-	var landerPrefab = $LanderPrefab  # shorthand for get_node("AnimatedSprite2D")
-	var lander = landerPrefab.get_node("LunarLander")
 	lander.IsLanding = true
 
 func _process(delta: float) -> void:
-	var landerPrefab = $LanderPrefab  # shorthand for get_node("AnimatedSprite2D")
-	var lander = landerPrefab.get_node("LunarLander")
-	var player = $CharacterBody2D  # shorthand for get_node("AnimatedSprite2D")
+	var player = $PlayerBody  # shorthand for get_node("AnimatedSprite2D")
 	
 	if lander.IsLanding == false:
+		$Camera.position = player.position
 		lander.LadderOut = true
 		if not hasSpawned:
 			player.visible = true;
 			hasSpawned = true
+	else:
+		$Camera.position = lander.position
 
-func _spawnTile(x, y, scale, textureToUse):
-	var tex_size = textureToUse.get_size()
-	var tile = StaticBody2D.new()
-	var tileSprite = Sprite2D.new()
-	tileSprite.texture = TileTexture
-	tileSprite.position = Vector2(TileScale / 2, TileScale / 2)
-	tileSprite.scale = Vector2(TileScale / tex_size.x, TileScale / tex_size.y)
-	tile.add_child(tileSprite)
-	
-	# Physics
-	var collider = CollisionShape2D.new()
-	var shape = RectangleShape2D.new()
-	shape.size = Vector2(TileScale, TileScale)
-	collider.shape = shape
-	collider.position = Vector2(TileScale / 2, TileScale / 2)
-	tile.add_child(collider)
 
-	# Placement
-	var x_pos = x * TileScale
-	var y_pos = y * TileScale             
-	tile.position = Vector2(x_pos, y_pos)
+func _spawnTile(x, y, textureToUse: Texture2D):
 	
+	var tile = TilePrefab.instantiate()
+	tile.position = Vector2(x * TileScale,y)
+	tile.scale = Vector2(TileScale / textureToUse.get_size().x, TileScale / textureToUse.get_size().y)
 	add_child(tile)
+	
+	#var tex_size = textureToUse.get_size()
+	#var tile = StaticBody2D.new()
+	#var tileSprite = Sprite2D.new()
+	#tileSprite.texture = TileTexture
+	#tileSprite.position = Vector2(TileScale / 2, TileScale / 2)
+	#tileSprite.scale = Vector2(TileScale / tex_size.x, TileScale / tex_size.y)
+	#tile.add_child(tileSprite)
+	#
+	## Physics
+	#var collider = CollisionShape2D.new()
+	#var shape = RectangleShape2D.new()
+	#shape.size = Vector2(TileScale, TileScale)
+	#collider.shape = shape
+	#collider.position = Vector2(TileScale / 2, TileScale / 2)
+	#tile.add_child(collider)
+#
+	## Placement
+	#var x_pos = x * TileScale
+	#var y_pos = y * TileScale             
+	#tile.position = Vector2(x_pos, y_pos)
+	#
+	#add_child(tile)
 
 
 func GenerateTestLevel() -> void:
-	var tex_size = TileTexture.get_size()
 	for x in range(LevelWidth):
 		for y in range(LevelHeight): 
-			
 			if y == 0 and x == LevelWidth - 1:
-				_spawnTile(x, y, TileScale, TileTexture)
 				var sat = SatScene.instantiate()
 				sat.position = Vector2(x*TileScale,(y-1)*TileScale)
 				add_child(sat)
-				continue
 
-			_spawnTile(x, y, TileScale, TileTexture)
+			_spawnTile(x, y, TileTexture)
 
 
 func _generateRandomLevel() -> void:

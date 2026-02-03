@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://pr0ocick000k"]
 
 [ext_resource type="Texture2D" uid="uid://bx0jcdrjo47eg" path="res://Assets/Enemy/mobs.png" id="1_72u4w"]
+[ext_resource type="Script" uid="uid://bbt4rmhcy0vgm" path="res://Prefabs/RockWarbler_Prefab/RockWarbler.gd" id="1_fad4f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fad4f"]
 atlas = ExtResource("1_72u4w")
@@ -67,15 +68,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kpc5o"]
+size = Vector2(22, 13)
+
 [node name="RockWarbler" type="Node2D" unique_id=882057299]
+script = ExtResource("1_fad4f")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1879319504]
+[node name="Body" type="CharacterBody2D" parent="." unique_id=1879319504]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=2125665955]
+[node name="Sprite" type="AnimatedSprite2D" parent="Body" unique_id=2125665955]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_bywoa")
 animation = &"Death"
 frame = 1
 frame_progress = 1.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1970660360]
+[node name="Collider" type="CollisionShape2D" parent="Body" unique_id=1970660360]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_kpc5o")

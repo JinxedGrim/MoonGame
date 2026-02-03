@@ -1,5 +1,8 @@
 extends Node2D
 
+func playLanderExit(player) -> void:
+	$LunarLander/LanderSprite.play("LadderOut")
+	player.position = $LunarLander/LanderSprite.position
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

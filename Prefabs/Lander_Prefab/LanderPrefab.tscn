@@ -64,7 +64,7 @@ script = ExtResource("1_lewvn")
 texture_filter = 1
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_ni6rp")
-animation = &"Idle"
+animation = &"LadderOut"
 
 [node name="LanderCollider" type="CollisionShape2D" parent="LunarLander" unique_id=1816361502]
 position = Vector2(0, -0.75)

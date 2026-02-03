@@ -8,12 +8,11 @@ enum AnimationMode
 }
 
 # Gravity will pull the rocket down
-@export var INITIAL_GRAVITY_FACTOR = 1
-@export var INITIAL_SLOW_DOWN = 5
-@export var SLOWDOWN_FACTOR = 6
+@export var MAX_DESCENT_SPEED := 120.0
+@export var LANDING_DESCENT_SPEED := 30.0
+@export var THRUST_RESPONSE := 6.0
 var CurrSlowDown = 0
 
-var LadderOut: bool = false
 var IsLanding: bool = false
 var AnimMode: AnimationMode = AnimationMode.Idle
 
@@ -34,9 +33,21 @@ func _physics_process(delta: float) -> void:
 	if IsLanding:
 		# Apply gravity only if not yet on the floor
 		if not is_on_floor():
-			CurrSlowDown = SLOWDOWN_FACTOR * exp(-CurrSlowDown + INITIAL_SLOW_DOWN)
 			velocity += (get_gravity() * delta)
-			velocity.y = clamp(velocity.y, 0, INF)
+			
+			# desired descent rate
+			var targetSpeed := LANDING_DESCENT_SPEED
+
+			# smooth thrust response
+			velocity.y = lerp(
+				velocity.y,
+				targetSpeed,
+				THRUST_RESPONSE * delta
+			)
+
+			velocity.y = min(velocity.y, MAX_DESCENT_SPEED)
+
+			
 			#print("Velocity Y: ", velocity.y)
 			#print("CurrSlowDown: ", CurrSlowDown)
 						
@@ -49,13 +60,9 @@ func _physics_process(delta: float) -> void:
 
 			IsLanding = false
 			
-			if AnimMode != AnimationMode.Idle || AnimMode != AnimationMode.LadderOut:
+			if AnimMode == AnimationMode.Flying:
 				updateAnimation = true
-				
-				if LadderOut:
-					AnimMode = AnimationMode.LadderOut
-				else:
-					AnimMode = AnimationMode.Idle
+				AnimMode = AnimationMode.Idle
 					
 	if updateAnimation:
 		_updateAnimation()

@@ -26,12 +26,15 @@ func _process(delta: float) -> void:
 	
 	if lander.IsLanding == false:
 		$Camera.position = player.position
-		lander.LadderOut = true
 		if not hasSpawned:
 			player.visible = true;
 			hasSpawned = true
+			landerPrefab.playLanderExit(player)
 	else:
 		$Camera.position = lander.position
+		
+		#sky doesnt match  but this is nice
+		$Camera.zoom = Vector2(10, 10)
 
 
 func _spawnTile(x, y, textureToUse: Texture2D):

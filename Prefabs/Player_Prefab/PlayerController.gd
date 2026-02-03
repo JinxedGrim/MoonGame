@@ -23,7 +23,6 @@ func _physics_process(delta):
 	var is_walking = abs(velocity.x) > 1.0
 
 	if Input.is_action_just_pressed("Jump") and onFloor:
-		print("Jump")
 		velocity.y += jumpSpeed  
 
 	move_and_slide()
